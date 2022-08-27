@@ -25,29 +25,29 @@ public class HW34MainClass {
         // Total amount of workers, max, min and average salary sizes
         DoubleSummaryStatistics salaryList = programmers.stream()
                 .collect(Collectors.summarizingDouble(x -> x.getSalary()));
-        System.out.println("The amount of workers is " + salaryList.getCount());
-        System.out.println("Max salary size is $" + salaryList.getMax());
-        System.out.println("Min salary size is $" + salaryList.getMin());
-        System.out.println("Average salary size is $" + salaryList.getAverage());
+        System.out.println("The amount of workers: " + salaryList.getCount());
+        System.out.println("Max salary size: $" + salaryList.getMax());
+        System.out.println("Min salary size: $" + salaryList.getMin());
+        System.out.println("Average salary size: $" + salaryList.getAverage());
 
         // Distance-workers
         ArrayList<String> programmersFromHome = new ArrayList(programmers.stream()
                 .filter(x -> x.isWorkFromHome() == true)
                 .map(x -> x.getName())
                 .collect(Collectors.toList()));
-        System.out.println("Home-workers are " + programmersFromHome);
+        System.out.println("Programmer, works from home: " + programmersFromHome);
 
         // Java coders
         int javaProgrammers = (int) programmers.stream()
                 .filter(x -> x.getLanguage() == ProgrammingLanguage.JAVA)
                 .count();
-        System.out.println("The amount of java programmers is " + javaProgrammers);
+        System.out.println("The amount of java programmers: " + javaProgrammers);
 
         // Python from home
-        int pythonFromHomeProgrammers = (int) programmers.stream()
+        ArrayList<String> pythonFromHomeProgrammers = new ArrayList(programmers.stream()
                 .filter(x -> x.getLanguage() == ProgrammingLanguage.PYTHON && x.isWorkFromHome() == true)
-                .count();
-        System.out.println("The amount of python programmers from home is " + pythonFromHomeProgrammers);
+                .map(x -> x.getName()).collect(Collectors.toList()));
+        System.out.println("Python programmer, works from home: " + pythonFromHomeProgrammers);
 
         // Max JS salary size
         Comparator<Programmer> salaryComparator = new Comparator<Programmer>() {
@@ -60,6 +60,6 @@ public class HW34MainClass {
                 .filter(x -> x.getLanguage() == ProgrammingLanguage.JS)
                 .max(salaryComparator)
                 .get().getSalary();
-        System.out.println("Max JS salary size is $" + maxSalaryJS);
+        System.out.println("Max JS salary size: $" + maxSalaryJS);
     }
 }
